@@ -1,25 +1,24 @@
-
 # MDPbiome
 *Authors: Tomas de la Rosa, Beatriz García-Jiménez, Mark D. Wilkinson*
 
 *Date: April, 2018*
 
 ### Description
-**MDPbione** is a software developed in R that uses Markov Decision Processes to create "policy prescriptions" for microbiome engineering. MDPbiome performs a variety of analysis describing the robustness of the prescription, as well as a variety of visualizations to assist in manual interpretation of the state transitions and biological understanding of a microbiome's dynamics.
+**MDPbiome** is a software developed in R that uses Markov Decision Processes to create "policy prescriptions" for microbiome engineering. MDPbiome performs a variety of analysis describing the robustness of the prescription, as well as a variety of visualizations to assist in manual interpretation of the state transitions and biological understanding of a microbiome's dynamics.
 
 
 ### Pre-requisites 
-MDPbiome uses the **phyloseq** package to manage data from OTU tables, and the **MDPToolbox** package to perform MDP algorithms.  In addition, the system needs commonly used R package for data analysis, such as reshape, ggplot2 and Hmisc.  For a complete list, check the imported libraries in the initMDPBiome.R file.
+MDPbiome uses the **phyloseq** package to manage data from OTU tables, and the **MDPtoolbox** package to perform MDP algorithms.  In addition, the system needs commonly used R package for data analysis, such as reshape, ggplot2 and Hmisc.  For a complete list, check the imported libraries in the initMDPBiome.R file.
 
 ### Dataset Setup
-Given the heterogeneity of longitudinal micribiome datasets, MDPbiome needs to pre-load a configuration script file where user specifies the elements and features of the dataset. The input to MDPbiome is a phyloseq object obtained from importing an OTU table and a mapping file containing the meta-data of the micrbiome samples. 
+Given the heterogeneity of longitudinal microbiome datasets, MDPbiome needs to pre-load a configuration script file where user specifies the elements and features of the dataset. The input to MDPbiome is a phyloseq object obtained from importing an OTU table and a mapping file containing the meta-data of the microbiome samples. 
 This mapping file, in CSV or TSV format, should contain the following columns:
 
 * a variable to identify subjects (e.g., "Subject.ID")
-* a variable to identify time steps for sample time serie (e.g., "day")
+* a variable to identify time steps for sample time series (e.g., "day")
 * a variable to indicate the cluster of each sample (named as "cluster")
 * variables to indicate individual or combined perturbations (e.g. "antibiotic", "probiotic")
-* (optional) a variable to represent an "goodness" of sample. The per-cluster average of this feature could serve as state utility function for defining reward functions.
+* (optional) a variable to represent the "goodness" of samples. The per-cluster average of this feature could serve as state utility function for defining reward functions.
 
 If the mapping file does not contain one of these elements, we suggest to append them within the configuration file.  Next, we will show a step-by-step description for creating the configuration file and for running high-level functions of MDPbiome.
 
@@ -50,7 +49,7 @@ data.norm <- MDPpreprocess(data.raw, processDir = "../Data/Example/")
 This step involves creating MDP states as a form of abstracting groups of similar microbiome samples.
 The common way of doing this abstraction is by clustering techniques.  
 
-Note that, if you do not have a cluster assigment in your mapping file, you could use our *Robust Clustering* procedure, also provided with MDPbiome sources. This will compute a good performing set of clusters based on several metrics.  If the process doesn't find clusters it returns -1. If the process succeds it will append a "cluster" attribute to the sample data of the phyloseq object. 
+Note that, if you do not have a cluster assignment in your mapping file, you could use our *Robust Clustering* procedure, also provided with MDPbiome sources. This will compute a good performing set of clusters based on several metrics.  If the process doesn't find clusters it returns -1. If the process succeeds it will append a "cluster" attribute to the sample data of the phyloseq object. 
 
 ```{r eval=FALSE}
 source("robust.clustering.metagenomics.functions.r")
@@ -88,15 +87,15 @@ createTreeDir(dirdata,Perturbations)
 ### Running MDPbiome
 We describe here the high-level functions of the system. To see examples of the output you can expect, please check the pre-computed results presented in [MDPbiome results](https://tomdelarosa.shinyapps.io/mdpbiome/)
 
-<!-- #### 1. Analyzing Sample Time Serie -->
-<!-- This generates set of plots for analyzing sample time serie. You need to provide the phyloseq object with the required elements described above, and optionally the phyloseq object without the normalization step.  This second object is used to compute the alpha-diversity of samples using original abundances. -->
+<!-- #### 1. Analyzing Sample Time Series -->
+<!-- This generates set of plots for analyzing sample time series. You need to provide the phyloseq object with the required elements described above, and optionally the phyloseq object without the normalization step.  This second object is used to compute the alpha-diversity of samples using original abundances. -->
 
 <!-- ```{r eval=FALSE} -->
 <!-- mdpBiomePreAnalysis(data.norm,data.raw) -->
 <!-- ``` -->
 
 #### 1. Computing Optimal Policy & Policy Reliability
-This computes the optimal policy for the given data, and performs a "Monte Carlo"-linke sampling experiment to determine the stability ratio for the policy and by each individual action. By default, the alpha-diversity criteria is used to determine the reward function.
+This computes the optimal policy for the given data, and performs a "Monte Carlo"-like sampling experiment to determine the stability ratio for the policy and by each individual action. By default, the alpha-diversity criteria is used to determine the reward function.
 
 ```{r eval=FALSE}
 mdpBiomeBase()
