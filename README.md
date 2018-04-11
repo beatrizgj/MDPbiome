@@ -1,6 +1,4 @@
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 # MDPbiome
 *Authors: Tomas de la Rosa, Beatriz García-Jiménez, Mark D. Wilkinson*
 
