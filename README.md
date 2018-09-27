@@ -1,10 +1,13 @@
 # MDPbiome
-*Authors: Tomas de la Rosa, Beatriz García-Jiménez, Mark D. Wilkinson*
+*Authors: Tomás de la Rosa, Beatriz García-Jiménez, Mark D. Wilkinson*
 
-*Date: April, 2018*
 
 ### Description
 **MDPbiome** is a software developed in R that uses Markov Decision Processes to create "policy prescriptions" for microbiome engineering. MDPbiome performs a variety of analysis describing the robustness of the prescription, as well as a variety of visualizations to assist in manual interpretation of the state transitions and biological understanding of a microbiome's dynamics.
+
+**Citation**: Please, cite us when you use MDPbiome in your work:  
+
+**Beatriz García-Jiménez, Tomás de la Rosa, Mark D. Wilkinson; MDPbiome: microbiome engineering through prescriptive perturbations, Bioinformatics, Volume 34, Issue 17, 1 September 2018, Pages i838–i847, [doi: 10.1093/bioinformatics/bty562](https://doi.org/10.1093/bioinformatics/bty562)**
 
 
 ### Pre-requisites 
