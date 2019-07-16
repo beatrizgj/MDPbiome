@@ -1,7 +1,6 @@
 # MDPbiome
-*Authors: Tomás de la Rosa, Beatriz García-Jiménez, Mark D. Wilkinson*
 
-![](logoMDPbiome.png){width=50%}
+![](logoMDPbiome.png)
 
 
 
